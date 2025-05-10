@@ -18,7 +18,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::with('tasks')->get();
-        Log::info($users);
+        // return response()->json($users);
         return view('Users.index')->with('users', $users);
     }
 
@@ -27,7 +27,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('auth.register');
+        $users = User::all();
+        return view('Users.create',compact('users'));
     }
 
     /**
@@ -35,7 +36,40 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $request->validate([
+                'name' => 'required',
+                'email' => 'required|email|unique:users,email',
+                'password' => 'required|min:8'
+            ]);
+
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
+
+            return response()->json([
+                'message' => 'User created successfully',
+                'user' => $user
+            ], 201);
+
+        } catch (ValidationException $e) {
+            return response()->json([
+                'message' => 'Validation failed',
+                'errors' => $e->validator->errors()
+            ], 422);
+        } catch (QueryException $e) {
+            return response()->json([
+                'message' => 'Database error',
+                'error' => $e->getMessage()
+            ], 500);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'An unexpected error occurred',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 
     /**
@@ -67,8 +101,15 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        if(!$user){
+            return response()->json(['message' => 'User not found'], 404);
+        }
+        // dd($user);
+        $user->delete();
+        return redirect()->route('users.index')->with('success', $user->name . ' deleted successfully');
+        // Log::info('User deleted successfully', ['user' => $user]);
     }
 }
