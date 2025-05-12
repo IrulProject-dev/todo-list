@@ -4,11 +4,16 @@
     <h1>Detail User</h1>
     <p><strong>Nama:</strong> {{ $user->name }}</p>
     <p><strong>Email:</strong> {{ $user->email }}</p>
-    <p><strong>Tanggal:</strong> {{ $user->created_at }}</p>
+
+    @if ($user->tasks && $user->tasks->isNotEmpty())
+        <p><strong>Tanggal:</strong> {{ $user->tasks->first()->created_at }}</p>
+    @endif
 
     <h2>Tasks</h2>
     @if ($user->tasks->isEmpty())
-        <p>User ini tidak memiliki tugas.</p>
+        <div class="alert alert-warning">
+            User ini belum memiliki task.
+        </div>
     @else
         <ul class="list-unstyled">
             @foreach ($user->tasks as $task)
