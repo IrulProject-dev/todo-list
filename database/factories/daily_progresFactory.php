@@ -23,7 +23,7 @@ class daily_progresFactory extends Factory
 
         return [
             'user_id' =>User::all()->random()->id,
-            'task_id' => task::all()->random()->id,
+            // 'task_id' => task::all()->random()->id,
             'date' => fake()->dateTimeThisYear,
             'total_task' => fake()->numberBetween(1, 10),
             'completed_tasks' => fake()->numberBetween(0, 10),

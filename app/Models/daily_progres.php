@@ -11,10 +11,10 @@ class daily_progres extends Model
     use HasFactory;
     protected $fillable = [
         'user_id',
-        'task_id',
+        // 'task_id',
         'date',
         'total_task',
-        'total_completed',
+        'completed_tasks',
         'percentage',
     ];
 
@@ -24,6 +24,6 @@ class daily_progres extends Model
     }
     public function task()
     {
-        return $this->belongsTo(task::class, 'task_id');
+        return $this->belongsTo(task::class, 'daily_progress_id');
     }
 }

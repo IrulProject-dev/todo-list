@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\daily_progres;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -22,6 +23,7 @@ class taskFactory extends Factory
             'title' => fake()->sentence,
             'description' => fake()->paragraph,
             'completed' => fake()->boolean,
+            'daily_progress_id' => daily_progres::all()->random()->id,
         ];
     }
 }

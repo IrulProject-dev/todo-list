@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->boolean('completed')->default(false);
+            $table->foreignId('daily_progress_id')->nullable()->constrained('daily_progres')->onDelete('cascade');
             $table->timestamps();
         });
     }

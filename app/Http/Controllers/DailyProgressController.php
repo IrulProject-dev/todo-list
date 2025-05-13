@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\daily_progres;
+use App\Models\task;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class DailyProgressController extends Controller
@@ -10,12 +12,17 @@ class DailyProgressController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        return auth()->user()->dailyProgress()
-        ->orderBy('date', 'desc')
-        ->get();
-    }
+
+     public function index()
+     {
+         $tasks = auth()->user()->tasks()->orderBy('updated_at', 'desc')->get()->groupBy(function ($task){
+                return Carbon::parse($task->updated_at)->format('Y-m-d');
+            });
+
+         // Kirim data ke view
+         return view('dashboard', ['progress' => $tasks,]);
+     }
+
 
     /**
      * Show the form for creating a new resource.

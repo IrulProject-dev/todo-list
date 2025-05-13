@@ -14,6 +14,7 @@ class task extends Model
         'title',
         'description',
         'completed',
+        'daily_progress_id',
     ];
 
     public function user()
@@ -22,6 +23,6 @@ class task extends Model
     }
     public function dailyProgres()
     {
-        return $this->hasMany(daily_progres::class, 'task_id');
+        return $this->hasMany(daily_progres::class, 'daily_progress_id');
     }
 }
