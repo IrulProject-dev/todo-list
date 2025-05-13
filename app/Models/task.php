@@ -20,4 +20,8 @@ class task extends Model
     {
         return $this->belongsTo(User::class,'user_id');
     }
+    public function dailyProgres()
+    {
+        return $this->hasMany(daily_progres::class, 'task_id');
+    }
 }

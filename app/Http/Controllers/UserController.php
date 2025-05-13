@@ -19,8 +19,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::with('tasks')->get();
-        // return response()->json($users);
-        return view('Users.index')->with('users', $users);
+        return view('users.index')->with('users', $users);
     }
 
     /**
@@ -29,7 +28,7 @@ class UserController extends Controller
     public function create()
     {
         $users = User::all();
-        return view('Users.create', compact('users'));
+        return view('auth.register', compact('users'));
     }
 
     /**
@@ -69,7 +68,7 @@ class UserController extends Controller
     {
         $user = User::with('tasks')->findOrFail($id);
         // dd($user);
-        return view('Users.show', compact('user'));
+        return view('users.show', compact('user'));
     }
 
     /**
@@ -78,7 +77,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::findOrfail($id);
-        return View('Users.edit', compact('user'));
+        return View('users.edit', compact('user'));
     }
 
     /**

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('daily_progres', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('task_id')->constrained()->onDelete('cascade');
             $table->date('date')->nullable();
             $table->integer('total_task')->default(0);
             $table->integer('completed_tasks')->default(0);
