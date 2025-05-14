@@ -18,7 +18,7 @@
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('users.index')" :active="request()->routeIs('Users.index')">
-                        {{ __('Users') }}
+                        {{ __('Users Management') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
@@ -83,7 +83,12 @@
         </div>
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('dashboard')">
-                {{ __('Users') }}
+                {{ __('Users Management') }}
+            </x-responsive-nav-link>
+        </div>
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('tasks.today')" :active="request()->routeIs('dashboard')">
+                {{ __('Today') }}
             </x-responsive-nav-link>
         </div>
         <!-- Responsive Settings Options -->

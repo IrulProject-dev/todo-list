@@ -20,7 +20,7 @@
                 <li class="flex items-center justify-between bg-white border border-gray-200 rounded-lg p-3 shadow-sm">
                     <span class="text-gray-700">{{ $progressItem->title }}</span>
                     @if ($progressItem->completed == 1)
-                    <span class="text-gray-500 text-sm font-medium bg-gray-100 px-2 py-0.5 rounded-full">
+                    <span class="text-gray-500 text-sm font-medium bg-green-100 px-2 py-0.5 rounded-full">
                         Selesai
                     </span>
                     @else
